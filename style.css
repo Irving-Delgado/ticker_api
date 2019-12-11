@@ -1,0 +1,40 @@
+*{
+	padding: 0px;
+	margin: 0px;
+}
+.ticker{
+	height: 200px;
+	width: 315px;
+	background-color: rgba(0, 176, 173, 0.8);
+	display: inline-block;
+}
+	#ticker_symb{
+		color: white;
+		font-family: 'Montserrat', sans-serif;
+		font-size: 22px;
+		margin-left: 30px;
+		margin-top: 20px;
+	}
+	#ticker_number{
+		font-size: 46px;
+		color: white;
+		font-family: 'Montserrat', sans-serif;
+		font-weight:700;
+		margin-left:30px;
+		padding: 10px 0px;
+	}
+	#ticker_percent{
+		color: white;
+		font-family: 'Montserrat', sans-serif;
+		font-size: 22px;
+		margin-left:30px;
+		font-weight: 400;
+	}
+	#ticker_time{
+		color: white;
+		font-family: 'Montserrat', sans-serif;
+		padding-top: 10px;
+		font-size: 12px;
+		margin-left:30px;
+		font-weight: 400;
+	}
