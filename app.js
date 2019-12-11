@@ -1,43 +1,35 @@
-window.onscroll = function() {scrollFunction()};
-showStockInfo();
+function yearStatus(){
+	$.getJSON("https://api.worldtradingdata.com/api/v1/stock?symbol=DGSE&api_token=vW7HF1jjz74mX03o7RAoGfvFTALmS3B581QvqzUYcbQ4OyYdFMohmBGylb5U", function(res){
+	
+		var stockDate = res['data'][0]['last_trade_time'];
+		var timeZone = res['data'][0]['timezone'];
+		var price = res['data'][0]['price'];
+		var stockClose = res['data'][0]['close_yesterday'];
+		var stockChangeIncrease = price-stockClose;
+		var increaseChange = (stockChangeIncrease/stockClose)*100
+		var stockChangeDecrease = stockClose-price;
+		var decreaseChange = (stockChangeDecrease/stockClose)*100
 
-function scrollFunction() {
-  if (document.body.scrollTop > 20|| document.documentElement.scrollTop > 20) {
-    document.querySelector(".main_nav_sticky").style.top = "0";
-    document.querySelector(".main_nav").style.display = "none";
-  } else {
-    document.querySelector(".main_nav_sticky").style.top = "-65px";
-    document.querySelector(".main_nav").style.display = "inline-block";
-  }
-}
 
-
-function showStockInfo(){
-	$.getJSON("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=DGSE&interval=15min&apikey=96OLO5409V1FXI32", function(res){
-		$.getJSON("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=DGSE&apikey=96OLO5409V1FXI32", function(daily){
-		
-
-		var stockDate = res['Meta Data']['3. Last Refreshed'];
-		timeZone = res['Meta Data']['6. Time Zone'];
 
 		var newStockDate =stockDate.replace(/ /g,"T");
 
 		var date = new Date(newStockDate);
 		var hour = date.getHours();
-		var timeSpec = 'a.m';
-		
+		var timeSpec = 'AM';
+			
 		if(hour == 0){
 			hour = 12;
-			timeSpec = 'a.m';
+			timeSpec = 'AM';
 		}else if(hour<12){
 			hour = hour;
-			timeSpec = 'a.m';
+			timeSpec = 'AM';
 		}else if(hour>12){
 			hour = (hour -12);
-			timeSpec = 'p.m';
+			timeSpec = 'PM';
 		}else{
 			hour = 12;
-			timeSpec = 'p.m';
+			timeSpec = 'PM';
 		}
 
 		var minutes = date.getMinutes();
@@ -59,40 +51,17 @@ function showStockInfo(){
 		var todayDate = month+"/"+currentDate+"/"+year;
 		var fullTime = hour+':'+minutes;
 
+		$('#ticker_number').html('$'+price);
 
-		var stockOpen = res['Time Series (15min)'][stockDate]['1. open'];
-		var stockHigh = res['Time Series (15min)'][stockDate]['2. high'];
-		var stockLow = res['Time Series (15min)'][stockDate]['3. low'];
-		var stockClose = res['Time Series (15min)'][stockDate]['4. close'];
-		var stockVolume = res['Time Series (15min)'][stockDate]['5. volume'];
-
-		var prevClose = daily['Time Series (Daily)'][fullDate]['4. close'];
-
-
-		var stockMoney = stockClose * 100 / 100;
-		var stockChange = prevClose-stockClose;
-		var stockChangeDown = (stockChange/prevClose)*100;
-
-		var stockPositive = stockClose - prevClose;
-		var stockChangeUp = (stockPositive/prevClose)*100;
-
-
-		if(prevClose>stockOpen){
-			$('#ticker_percent').html('-'+(stockChange.toFixed(3)+" "+"("+'-'+stockChangeDown.toFixed(2)+"%"+")"));
+		if(stockClose>price){
+			$('#ticker_percent').html('-'+(stockChangeDecrease.toFixed(3)+" "+"("+'-'+decreaseChange.toFixed(2)+"%"+")"));
 		}else{
-			$('#ticker_percent').html('+'+ (stockPositive.toFixed(3))+" "+"("+'+'+stockChangeUp.toFixed(2)+'%'+')');
+			$('#ticker_percent').html('+'+ (stockChangeIncrease.toFixed(3))+" "+"("+'+'+increaseChange.toFixed(2)+'%'+')');
 		}
 
-		
-		
-
-
-		$('#ticker_number').html('$'+stockMoney.toFixed(2));
-
-		
-		$('#ticker_time').html("as of "+todayDate+" "+fullTime+" "+timeSpec+" "+"("+timeZone+")");
-		
-
-		})
+		$('#ticker_time').html("Last Traded "+todayDate+' '+fullTime+timeSpec+" "+timeZone);
+	
 	})
 }
+
+yearStatus();
