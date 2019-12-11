@@ -73,8 +73,8 @@ function showStockInfo(){
 		var stockChange = prevClose-stockClose;
 		var stockChangeDown = (stockChange/prevClose)*100;
 
-		var stockPositive = stockOpen - prevClose;
-		var stockChangeUp = (stockPositive/stockClose)*100;
+		var stockPositive = stockClose - prevClose;
+		var stockChangeUp = (stockPositive/prevClose)*100;
 
 
 		if(prevClose>stockOpen){
