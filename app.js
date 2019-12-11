@@ -58,8 +58,17 @@ function yearStatus(){
 		}else{
 			$('#ticker_percent').html('+'+ (stockChangeIncrease.toFixed(3))+" "+"("+'+'+increaseChange.toFixed(2)+'%'+')');
 		}
+		var closeTime = new Date();
+		var closeHour = (closeTime.getHours())+1;
+		var closeMin = closeTime.getMinutes();
+		var closed = closeHour+':'+closeMin;
 
-		$('#ticker_time').html("Last Traded "+todayDate+' '+fullTime+timeSpec+" "+timeZone);
+
+		if(closeHour >= 16 || closeHour <= 9 && closeMin == 30){
+			$('#ticker_time').html("Closed at: "+todayDate+' '+'5:00'+timeSpec+" "+timeZone);
+		}else{
+			$('#ticker_time').html("Last Traded at: "+todayDate+' '+fullTime+timeSpec+" "+timeZone);
+		}
 	
 	})
 }
