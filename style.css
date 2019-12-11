@@ -1,0 +1,178 @@
+*{
+	padding: 0px;
+	margin: 0px;
+}
+/* Home Screen */
+.main_nav{
+	height: 65px;
+	width: 100%;
+	padding-top: 5px;
+	position: fixed;
+	top:0;
+}
+#main_top_logo{
+	height: 26px;
+	width: 127px;
+	padding:15px 0px 0px 40px;
+}
+
+.nav_links{
+	display: inline-block;
+	vertical-align: top;
+	float: right;
+	margin-right: 20px;
+}
+.main_nav a{
+	text-decoration: none;
+	color: black;
+	display: inline-block;
+	font-family: 'Montserrat', sans-serif;
+	margin: 20px;
+	font-size: 14px;
+	font-weight: bold;
+}
+.main_nav a:hover{
+	color: #00b0ae;
+	transition: ease-in-out .25s;	
+}
+/*scroll in sticky nav*/
+.main_nav_sticky{
+	height: 65px;
+	position: fixed;
+	top: -65px; /* Hide the navbar 50 px outside of the top view */
+  	width: 100%; /* Full width */
+  	transition: top 0.5s;
+  	background-color: white;
+}
+#main_top_logo_sticky{
+	height: 26px;
+	width: 127px;
+	padding:15px 0px 0px 40px;
+}
+
+.nav_links_sticky{
+	display: inline-block;
+	vertical-align: top;
+	float: right;
+	margin-right: 20px;
+}
+.main_nav_sticky a{
+	text-decoration: none;
+	color: black;
+	display: inline-block;
+	font-family: 'Montserrat', sans-serif;
+	margin: 20px;
+	font-size: 14px;
+	font-weight: bold;
+}
+.main_nav_sticky a:hover{
+	color: #00b0ae;
+	transition: ease-in-out .25s;	
+}
+
+/* main container */
+
+.background_pic{
+	/*margin-top: 70px;*/
+	height: 530px;
+	width: 100%;
+	background: url('../images/envela-office.png') no-repeat;
+	background-position: center;
+	background-size: cover;
+	box-shadow: 0 3000px rgba(0, 0, 0, 0.4) inset;
+}
+	#main_heading{
+		margin: 140px 0px 0px 145px;
+		line-height: 1.125;
+		display: inline-block;
+		color: white;
+		font-family: 'Montserrat', sans-serif;
+		font-size: 46px;
+	}
+
+.ticker{
+	height: 200px;
+	width: 315px;
+	float: right;
+	background-color: rgba(0, 176, 173, 0.8);
+	display: inline-block;
+	margin:90px 275px 0px 0px;
+}
+	#ticker_symb{
+		color: white;
+		font-family: 'Montserrat', sans-serif;
+		font-size: 22px;
+		margin-left: 30px;
+		margin-top: 20px;
+	}
+	#ticker_number{
+		font-size: 46px;
+		color: white;
+		font-family: 'Montserrat', sans-serif;
+		font-weight:700;
+		margin-left:30px;
+		padding: 10px 0px;
+	}
+	#ticker_percent{
+		color: white;
+		font-family: 'Montserrat', sans-serif;
+		font-size: 22px;
+		margin-left:30px;
+		font-weight: 400;
+	}
+	#ticker_time{
+		color: white;
+		font-family: 'Montserrat', sans-serif;
+		padding-top: 10px;
+		font-size: 12px;
+		margin-left:30px;
+		font-weight: 400;
+	}
+.main_content{
+	text-align: center;
+	height: 430px;
+}
+	.main_content h1{
+		line-height: 1.125;
+		font-family: 'Montserrat', sans-serif;
+		font-size: 36px;
+		margin-top: 50px;
+	}
+	.main_content p{
+		line-height: 1.5;
+		display: inline-block;
+		width: 70%;
+		font-size: 14px;
+		margin-top: 20px;
+		font-family: 'Montserrat', sans-serif;
+		color: #707070;
+	}
+
+.latest_news{
+	height: 480px;
+	background-color: #f1f1f1;
+	text-align: center;
+}
+	.latest_news h1{
+		padding-top: 20px;
+		font-family: 'Montserrat', sans-serif;
+	}
+.footer{
+	height: 180px;
+	background: #00b0ae;
+}
+
+#logo_bottom{
+	display: inline-block;
+	width: 180px;
+	height: 40px;
+	margin: 40px 0px 0px 15px;
+}
+.copyright {
+	color:white;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 14px;
+	background-color: #00b0ae;
+	padding: 0px 0px 15px 15px;
+
+}
