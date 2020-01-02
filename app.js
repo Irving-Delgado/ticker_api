@@ -1,16 +1,12 @@
 function yearStatus(){
-	$.getJSON("https://api.worldtradingdata.com/api/v1/stock?symbol=DGSE&api_token=vW7HF1jjz74mX03o7RAoGfvFTALmS3B581QvqzUYcbQ4OyYdFMohmBGylb5U", function(res){
+	$.getJSON("https://api.worldtradingdata.com/api/v1/stock?symbol=ELA&api_token=vW7HF1jjz74mX03o7RAoGfvFTALmS3B581QvqzUYcbQ4OyYdFMohmBGylb5U", function(res){
 	
 		var stockDate = res['data'][0]['last_trade_time'];
 		var timeZone = res['data'][0]['timezone'];
 		var price = res['data'][0]['price'];
 		var stockClose = res['data'][0]['close_yesterday'];
-		var stockChangeIncrease = price-stockClose;
-		var increaseChange = (stockChangeIncrease/stockClose)*100
-		var stockChangeDecrease = stockClose-price;
-		var decreaseChange = (stockChangeDecrease/stockClose)*100
-
-
+		var stockDayChange = res['data'][0]['day_change'];
+		var changePct = res['data'][0]['change_pct'];
 
 		var newStockDate =stockDate.replace(/ /g,"T");
 
@@ -43,8 +39,8 @@ function yearStatus(){
 
 		if(day <10){
 			day= '0'+ day;
-		}else{
-			day= day;
+		}if(month<10){
+			month = '0' + month;
 		}
 
 		var fullDate = year+'-'+month+'-'+day;
@@ -53,18 +49,19 @@ function yearStatus(){
 
 		$('#ticker_number').html('$'+price);
 
-		if(stockClose>price){
-			$('#ticker_percent').html('-'+(stockChangeDecrease.toFixed(3)+" "+"("+'-'+decreaseChange.toFixed(2)+"%"+")"));
+		if(changePct > 0){
+			$('#ticker_percent').html('+'+stockDayChange+' '+'('+'+'+changePct+'%'+')');
 		}else{
-			$('#ticker_percent').html('+'+ (stockChangeIncrease.toFixed(3))+" "+"("+'+'+increaseChange.toFixed(2)+'%'+')');
+			$('#ticker_percent').html(stockDayChange+' '+'('+changePct+'%'+')');
 		}
+
 		var closeTime = new Date();
 		var closeHour = (closeTime.getHours())+1;
 		var closeMin = closeTime.getMinutes();
 		var closed = closeHour+':'+closeMin;
 
 
-		if(closeHour >= 16 || closeHour <= 9 && closeMin == 30){
+		if(closeHour >= 17 || closeHour <= 9 && closeMin == 30 && timeSpec.equals('AM')){
 			$('#ticker_time').html("Closed at: "+todayDate+' '+'5:00'+timeSpec+" "+timeZone);
 		}else{
 			$('#ticker_time').html("Last Traded at: "+todayDate+' '+fullTime+timeSpec+" "+timeZone);
